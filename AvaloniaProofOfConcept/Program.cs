@@ -1,12 +1,11 @@
-﻿using System;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Logging.Serilog;
 using AvaloniaProofOfConcept.ViewModels;
 using AvaloniaProofOfConcept.Views;
 
 namespace AvaloniaProofOfConcept
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
