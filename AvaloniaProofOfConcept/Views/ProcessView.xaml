@@ -36,7 +36,6 @@
                Grid.Column="1"
                Grid.ColumnSpan="3">
       <TextBlock HorizontalAlignment="Stretch"
-                 VerticalAlignment="Center"
                  DockPanel.Dock="Left"
                  Text="Search:" />
 
@@ -46,9 +45,7 @@
     <ListBox Grid.Row="3"
              Grid.Column="1"
              Grid.ColumnSpan="3"
-             BorderBrush="Transparent"
              ItemTemplate="{DynamicResource ProcessTemplate}"
-             Items="{Binding SearchResults}"
-             ScrollViewer.VerticalScrollBarVisibility="Auto" />
+             Items="{Binding SearchResults}" />
   </Grid>
 </UserControl>

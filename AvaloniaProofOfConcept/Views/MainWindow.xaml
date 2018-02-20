@@ -4,11 +4,47 @@
         Title="AvaloniaProofOfConcept"
         Width="600"
         Height="300"
+        Background="#E8E8E8"
+        Foreground="#171717"
         Icon="resm:AvaloniaProofOfConcept.Assets.avalonia-logo.ico">
+
+  <!--  light blue #7DBCE9  -->
+  <!--  dark blue #547E9C  -->
+  <!--  yellow highlight #E8CD7D  -->
+  <!--  yellow muted highlight #9C7E54  -->
+  <!--  font color #171717  -->
+  <!--  background #E8E8E8  -->
 
   <Design.DataContext>
     <vm:MainWindowViewModel />
   </Design.DataContext>
+
+  <Window.Styles>
+    <Style Selector="ListBox">
+      <Setter Property="Background" Value="#E8E8E8" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+    </Style>
+    <Style Selector="ListBoxItem">
+      <Setter Property="Height" Value="30" />
+      <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+    </Style>
+    <Style Selector="ListBoxItem:pointerover">
+      <Setter Property="Background" Value="#7DBCE9" />
+    </Style>
+    <Style Selector="ListBoxItem:selected">
+      <Setter Property="Background" Value="#547E9C" />
+    </Style>
+    <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+      <Setter Property="Background" Value="#547E9C" />
+    </Style>
+    <Style Selector="TextBlock">
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="TextBox">
+      <Setter Property="BorderThickness" Value="0" />
+    </Style>
+  </Window.Styles>
 
   <Grid RowDefinitions="Auto,5,*">
     <Grid.ColumnDefinitions>
@@ -20,16 +56,13 @@
     <Border Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="3"
-            Height="60"
-            Background="Gray">
-      <TextBlock HorizontalAlignment="Center"
-                 VerticalAlignment="Center"
-                 Text="{Binding Navigation.SelectedView.Header}" />
+            Height="55"
+            Background="#547E9C">
+      <TextBlock FontSize="18" Text="{Binding Navigation.SelectedView.Header}" />
     </Border>
 
     <ListBox Grid.Row="2"
              Grid.Column="0"
-             BorderBrush="Transparent"
              Items="{Binding Navigation.Views}"
              SelectedItem="{Binding Navigation.SelectedView}">
       <ListBox.ItemTemplate>
@@ -37,15 +70,6 @@
           <TextBlock Text="{Binding Header}" />
         </DataTemplate>
       </ListBox.ItemTemplate>
-      <ListBox.Styles>
-        <Style Selector="ListBoxItem">
-          <Setter Property="Height" Value="30" />
-        </Style>
-        <Style Selector="TextBlock">
-          <Setter Property="VerticalAlignment" Value="Center" />
-          <Setter Property="Margin" Value="5" />
-        </Style>
-      </ListBox.Styles>
     </ListBox>
 
     <ContentControl Grid.Row="2"

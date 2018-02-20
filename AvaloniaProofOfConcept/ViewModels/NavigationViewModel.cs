@@ -25,6 +25,11 @@ namespace AvaloniaProofOfConcept.ViewModels
                     Control = new ProcessView(),
                     Header ="Processes"
                 },
+                new ViewViewModel()
+                {
+                    Control = new Avalonia.Controls.Control(),
+                    Header ="TODO"
+                },
             };
 
             SelectedView = Views.First();
