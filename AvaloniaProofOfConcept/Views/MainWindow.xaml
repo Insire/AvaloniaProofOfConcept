@@ -4,102 +4,76 @@
         Title="AvaloniaProofOfConcept"
         Width="600"
         Height="300"
+        Background="#E8E8E8"
+        Foreground="#171717"
         Icon="resm:AvaloniaProofOfConcept.Assets.avalonia-logo.ico">
 
-  <Window.Resources>
-    <DataTemplate x:Key="ProcessTemplate">
-      <Grid>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="Auto" />
-          <ColumnDefinition Width="5" />
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="5" />
-          <ColumnDefinition Width="Auto" />
-          <ColumnDefinition Width="5" />
-          <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-
-        <Grid.RowDefinitions>
-          <RowDefinition Height="5" />
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="5" />
-        </Grid.RowDefinitions>
-
-        <TextBlock Grid.Row="1"
-                   Grid.Column="0"
-                   VerticalAlignment="Center"
-                   FontSize="14"
-                   FontWeight="Bold"
-                   Text="{Binding ProcessName}" />
-
-        <TextBlock Grid.Row="1"
-                   Grid.Column="2"
-                   VerticalAlignment="Center"
-                   Text="{Binding Id}" />
-
-        <TextBlock Grid.Row="1"
-                   Grid.Column="3"
-                   VerticalAlignment="Center"
-                   Text="{Binding MachineName}" />
-
-        <Button Grid.Row="1"
-                Grid.Column="5"
-                Command="{Binding Close}"
-                Content="Close" />
-
-        <Button Grid.Row="1"
-                Grid.Column="7"
-                Command="{Binding Kill}"
-                Content="Kill" />
-      </Grid>
-    </DataTemplate>
-  </Window.Resources>
+  <!--  light blue #7DBCE9  -->
+  <!--  dark blue #547E9C  -->
+  <!--  yellow highlight #E8CD7D  -->
+  <!--  yellow muted highlight #9C7E54  -->
+  <!--  font color #171717  -->
+  <!--  background #E8E8E8  -->
 
   <Design.DataContext>
     <vm:MainWindowViewModel />
   </Design.DataContext>
 
-  <Grid>
+  <Window.Styles>
+    <Style Selector="ListBox">
+      <Setter Property="Background" Value="#E8E8E8" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+    </Style>
+    <Style Selector="ListBoxItem">
+      <Setter Property="Height" Value="30" />
+      <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+    </Style>
+    <Style Selector="ListBoxItem:pointerover">
+      <Setter Property="Background" Value="#7DBCE9" />
+    </Style>
+    <Style Selector="ListBoxItem:selected">
+      <Setter Property="Background" Value="#547E9C" />
+    </Style>
+    <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+      <Setter Property="Background" Value="#547E9C" />
+    </Style>
+    <Style Selector="TextBlock">
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="TextBox">
+      <Setter Property="BorderThickness" Value="0" />
+    </Style>
+  </Window.Styles>
+
+  <Grid RowDefinitions="Auto,5,*">
     <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto" MinWidth="150" />
       <ColumnDefinition Width="5" />
       <ColumnDefinition Width="*" />
-      <ColumnDefinition Width="Auto" />
-      <ColumnDefinition Width="*" />
-      <ColumnDefinition Width="5" />
     </Grid.ColumnDefinitions>
 
-    <Grid.RowDefinitions>
-      <RowDefinition Height="5" />
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="5" />
-      <RowDefinition Height="*" />
-      <RowDefinition Height="5" />
-    </Grid.RowDefinitions>
+    <Border Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Height="55"
+            Background="#547E9C">
+      <TextBlock FontSize="18" Text="{Binding Navigation.SelectedView.Header}" />
+    </Border>
 
-    <DockPanel Grid.Row="1"
-               Grid.Column="1"
-               Grid.ColumnSpan="3">
-      <TextBlock HorizontalAlignment="Stretch"
-                 VerticalAlignment="Center"
-                 DockPanel.Dock="Left"
-                 Text="Search:" />
+    <ListBox Grid.Row="2"
+             Grid.Column="0"
+             Items="{Binding Navigation.Views}"
+             SelectedItem="{Binding Navigation.SelectedView}">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <TextBlock Text="{Binding Header}" />
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
 
-      <Button Command="{Binding ExecuteSearch}"
-              CommandParameter="{Binding SearchTerm}"
-              Content="Search"
-              DockPanel.Dock="Right" />
-
-      <TextBox Margin="5,0,5,0" Text="{Binding SearchTerm}" />
-    </DockPanel>
-
-    <ListBox Grid.Row="3"
-             Grid.Column="1"
-             Grid.ColumnSpan="3"
-             HorizontalAlignment="Stretch"
-             BorderBrush="Transparent"
-             ItemTemplate="{DynamicResource ProcessTemplate}"
-             Items="{Binding SearchResults}"
-             ScrollViewer.VerticalScrollBarVisibility="Auto" />
+    <ContentControl Grid.Row="2"
+                    Grid.Column="2"
+                    Content="{Binding Navigation.SelectedView.Control}" />
   </Grid>
 </Window>

@@ -1,0 +1,51 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <UserControl.Resources>
+    <DataTemplate x:Key="ProcessTemplate">
+      <Grid ColumnDefinitions="Auto,5,Auto,5,*,*" RowDefinitions="5,Auto,5">
+
+        <Image Grid.Row="1"
+               Grid.Column="0"
+               Width="16"
+               Height="16"
+               Source="resm:AvaloniaProofOfConcept.Assets.ic_power_settings_new_black_24dp_2x.png" />
+
+        <TextBlock Grid.Row="1"
+                   Grid.Column="2"
+                   VerticalAlignment="Center"
+                   FontSize="14"
+                   FontWeight="Bold"
+                   Text="{Binding ProcessName}" />
+
+        <TextBlock Grid.Row="1"
+                   Grid.Column="4"
+                   VerticalAlignment="Center"
+                   Text="{Binding Id}" />
+
+        <TextBlock Grid.Row="1"
+                   Grid.Column="5"
+                   VerticalAlignment="Center"
+                   Text="{Binding MachineName}" />
+      </Grid>
+    </DataTemplate>
+  </UserControl.Resources>
+
+  <Grid ColumnDefinitions="5,*,Auto,*,5" RowDefinitions="5,Auto,5,*,5">
+
+    <DockPanel Grid.Row="1"
+               Grid.Column="1"
+               Grid.ColumnSpan="3">
+      <TextBlock HorizontalAlignment="Stretch"
+                 DockPanel.Dock="Left"
+                 Text="Search:" />
+
+      <TextBox Margin="5,0,0,0" Text="{Binding SearchTerm}" />
+    </DockPanel>
+
+    <ListBox Grid.Row="3"
+             Grid.Column="1"
+             Grid.ColumnSpan="3"
+             ItemTemplate="{DynamicResource ProcessTemplate}"
+             Items="{Binding SearchResults}" />
+  </Grid>
+</UserControl>
