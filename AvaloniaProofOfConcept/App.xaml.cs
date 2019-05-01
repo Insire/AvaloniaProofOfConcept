@@ -9,7 +9,7 @@ namespace AvaloniaProofOfConcept
     {
         public override void Initialize()
         {
-            AvaloniaXamlLoaderPortableXaml.Load(this);
+            AvaloniaXamlLoader.Load(this);
 
 #if DEBUG
             SerilogLogger.Initialize(new LoggerConfiguration()
