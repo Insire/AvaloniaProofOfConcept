@@ -19,8 +19,8 @@ namespace AvaloniaProofOfConcept.ViewModels
 
         public ReactiveCommand<string, IEnumerable<Process>> ExecuteSearch { get; private set; }
 
-        private ObservableAsPropertyHelper<bool> _SpinnerVisibility;
-        public bool SpinnerVisibility => _SpinnerVisibility.Value;
+        private readonly ObservableAsPropertyHelper<bool> _spinnerVisibility;
+        public bool SpinnerVisibility => _spinnerVisibility.Value;
 
         private ObservableAsPropertyHelper<IEnumerable<Process>> _searchResults;
         public IEnumerable<Process> SearchResults => _searchResults.Value;
@@ -36,7 +36,7 @@ namespace AvaloniaProofOfConcept.ViewModels
                                                 .DistinctUntilChanged()
                         .InvokeCommand(ExecuteSearch);
 
-            _SpinnerVisibility = ExecuteSearch.IsExecuting.ToProperty(this, x => x.SpinnerVisibility, false);
+            _spinnerVisibility = ExecuteSearch.IsExecuting.ToProperty(this, x => x.SpinnerVisibility, false);
 
             ExecuteSearch.ThrownExceptions.Subscribe(ex => {/* Handle errors here */});
 
