@@ -1,5 +1,7 @@
 ﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Logging.Serilog;
+using Avalonia.ReactiveUI;
 using AvaloniaProofOfConcept.ViewModels;
 using AvaloniaProofOfConcept.Views;
 
@@ -23,9 +25,11 @@ namespace AvaloniaProofOfConcept
         // container, etc.
         private static void AppMain(Application app, string[] args)
         {
-            var window = new MainWindow
+            app.DataContext = new MainWindowViewModel();
+
+            var window = new MainWindow()
             {
-                DataContext = new MainWindowViewModel(),
+                DataContext = app.DataContext
             };
 
             app.Run(window);

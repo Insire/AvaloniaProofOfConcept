@@ -1,4 +1,5 @@
-﻿<Window xmlns="https://github.com/avaloniaui"
+﻿<Window x:Class="AvaloniaProofOfConcept.Views.MainWindow"
+        xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:AvaloniaProofOfConcept.ViewModels;assembly=AvaloniaProofOfConcept"
         Title="AvaloniaProofOfConcept"
@@ -8,72 +9,72 @@
         Foreground="#171717"
         Icon="resm:AvaloniaProofOfConcept.Assets.avalonia-logo.ico">
 
-  <!--  light blue #7DBCE9  -->
-  <!--  dark blue #547E9C  -->
-  <!--  yellow highlight #E8CD7D  -->
-  <!--  yellow muted highlight #9C7E54  -->
-  <!--  font color #171717  -->
-  <!--  background #E8E8E8  -->
+    <!--  light blue #7DBCE9  -->
+    <!--  dark blue #547E9C  -->
+    <!--  yellow highlight #E8CD7D  -->
+    <!--  yellow muted highlight #9C7E54  -->
+    <!--  font color #171717  -->
+    <!--  background #E8E8E8  -->
 
-  <Design.DataContext>
-    <vm:MainWindowViewModel />
-  </Design.DataContext>
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
 
-  <Window.Styles>
-    <Style Selector="ListBox">
-      <Setter Property="Background" Value="#E8E8E8" />
-      <Setter Property="BorderBrush" Value="Transparent" />
-    </Style>
-    <Style Selector="ListBoxItem">
-      <Setter Property="Height" Value="30" />
-      <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
-    </Style>
-    <Style Selector="ListBoxItem:pointerover">
-      <Setter Property="Background" Value="#7DBCE9" />
-    </Style>
-    <Style Selector="ListBoxItem:selected">
-      <Setter Property="Background" Value="#547E9C" />
-    </Style>
-    <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
-      <Setter Property="Background" Value="#547E9C" />
-    </Style>
-    <Style Selector="TextBlock">
-      <Setter Property="VerticalAlignment" Value="Center" />
-      <Setter Property="HorizontalAlignment" Value="Center" />
-    </Style>
-    <Style Selector="TextBox">
-      <Setter Property="BorderThickness" Value="0" />
-    </Style>
-  </Window.Styles>
+    <Window.Styles>
+        <Style Selector="ListBox">
+            <Setter Property="Background" Value="#E8E8E8" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+        <Style Selector="ListBoxItem">
+            <Setter Property="Height" Value="30" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        </Style>
+        <Style Selector="ListBoxItem:pointerover">
+            <Setter Property="Background" Value="#7DBCE9" />
+        </Style>
+        <Style Selector="ListBoxItem:selected">
+            <Setter Property="Background" Value="#547E9C" />
+        </Style>
+        <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+            <Setter Property="Background" Value="#547E9C" />
+        </Style>
+        <Style Selector="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+        <Style Selector="TextBox">
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+    </Window.Styles>
 
-  <Grid RowDefinitions="Auto,5,*">
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="Auto" MinWidth="150" />
-      <ColumnDefinition Width="5" />
-      <ColumnDefinition Width="*" />
-    </Grid.ColumnDefinitions>
+    <Grid RowDefinitions="Auto,5,*">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="150" />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-    <Border Grid.Row="0"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"
-            Height="55"
-            Background="#547E9C">
-      <TextBlock FontSize="18" Text="{Binding Navigation.SelectedView.Header}" />
-    </Border>
+        <Border Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Height="55"
+                Background="#547E9C">
+            <TextBlock FontSize="18" Text="{Binding Navigation.SelectedView.Header}" />
+        </Border>
 
-    <ListBox Grid.Row="2"
-             Grid.Column="0"
-             Items="{Binding Navigation.Views}"
-             SelectedItem="{Binding Navigation.SelectedView}">
-      <ListBox.ItemTemplate>
-        <DataTemplate>
-          <TextBlock Text="{Binding Header}" />
-        </DataTemplate>
-      </ListBox.ItemTemplate>
-    </ListBox>
+        <ListBox Grid.Row="2"
+                 Grid.Column="0"
+                 Items="{Binding Navigation.Views}"
+                 SelectedItem="{Binding Navigation.SelectedView}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Header}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
-    <ContentControl Grid.Row="2"
-                    Grid.Column="2"
-                    Content="{Binding Navigation.SelectedView.Control}" />
-  </Grid>
+        <ContentControl Grid.Row="2"
+                        Grid.Column="2"
+                        Content="{Binding Navigation.SelectedView.Control}" />
+    </Grid>
 </Window>
