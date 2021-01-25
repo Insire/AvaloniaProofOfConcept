@@ -1,7 +1,8 @@
 ﻿using Avalonia;
-using Avalonia.Logging.Serilog;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Serilog;
+using AvaloniaProofOfConcept.ViewModels;
+using AvaloniaProofOfConcept.Views;
 
 namespace AvaloniaProofOfConcept
 {
@@ -10,13 +11,19 @@ namespace AvaloniaProofOfConcept
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
+        }
 
-#if DEBUG
-            SerilogLogger.Initialize(new LoggerConfiguration()
-                .MinimumLevel.Warning()
-                .WriteTo.Trace(outputTemplate: "{Area}: {Message}")
-                .CreateLogger());
-#endif
+        public override void OnFrameworkInitializationCompleted()
+        {
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                desktop.MainWindow = new MainWindow
+                {
+                    DataContext = new MainWindowViewModel(),
+                };
+            }
+
+            base.OnFrameworkInitializationCompleted();
         }
     }
 }
