@@ -3,8 +3,8 @@
               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
               xmlns:local="clr-namespace:AvaloniaProofOfConcept"
               Title="AvaloniaProofOfConcept"
-              Width="600"
-              Height="300"
+              Width="1920"
+              Height="1080"
               Foreground="{StaticResource SystemBaseHighColor}"
               Icon="/Assets/avalonia-logo.ico">
 
