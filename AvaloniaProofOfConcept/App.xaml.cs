@@ -23,6 +23,9 @@ namespace AvaloniaProofOfConcept
                 };
             }
 
+            var theme = new Avalonia.Themes.Default.DefaultTheme();
+            theme.TryGetResource("Button", out _);
+
             base.OnFrameworkInitializationCompleted();
         }
     }

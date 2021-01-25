@@ -1,80 +1,58 @@
-﻿<Window x:Class="AvaloniaProofOfConcept.Views.MainWindow"
-        xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="clr-namespace:AvaloniaProofOfConcept.ViewModels;assembly=AvaloniaProofOfConcept"
-        Title="AvaloniaProofOfConcept"
-        Width="600"
-        Height="300"
-        Background="#E8E8E8"
-        Foreground="#171717"
-        Icon="resm:AvaloniaProofOfConcept.Assets.avalonia-logo.ico">
+﻿<FluentWindow x:Class="AvaloniaProofOfConcept.Views.MainWindow"
+              xmlns="https://github.com/avaloniaui"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:local="clr-namespace:AvaloniaProofOfConcept"
+              Title="AvaloniaProofOfConcept"
+              Width="600"
+              Height="300"
+              Foreground="{StaticResource SystemBaseHighColor}"
+              Icon="/Assets/avalonia-logo.ico">
 
-    <!--  light blue #7DBCE9  -->
-    <!--  dark blue #547E9C  -->
-    <!--  yellow highlight #E8CD7D  -->
-    <!--  yellow muted highlight #9C7E54  -->
-    <!--  font color #171717  -->
-    <!--  background #E8E8E8  -->
+	<Design.DataContext>
+		<local:MainWindowViewModel />
+	</Design.DataContext>
 
-    <Design.DataContext>
-        <vm:MainWindowViewModel />
-    </Design.DataContext>
+	<FluentWindow.Styles>
+		<Style Selector="TitleBar:fullscreen">
+			<Setter Property="Background" Value="#7f000000" />
+		</Style>
+	</FluentWindow.Styles>
 
-    <Window.Styles>
-        <Style Selector="ListBox">
-            <Setter Property="Background" Value="#E8E8E8" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-        </Style>
-        <Style Selector="ListBoxItem">
-            <Setter Property="Height" Value="30" />
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
-        </Style>
-        <Style Selector="ListBoxItem:pointerover">
-            <Setter Property="Background" Value="#7DBCE9" />
-        </Style>
-        <Style Selector="ListBoxItem:selected">
-            <Setter Property="Background" Value="#547E9C" />
-        </Style>
-        <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
-            <Setter Property="Background" Value="#547E9C" />
-        </Style>
-        <Style Selector="TextBlock">
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-        </Style>
-        <Style Selector="TextBox">
-            <Setter Property="BorderThickness" Value="0" />
-        </Style>
-    </Window.Styles>
+	<Panel>
+		<DockPanel HorizontalAlignment="Stretch">
+			<ExperimentalAcrylicBorder Width="240" DockPanel.Dock="Left">
+				<ExperimentalAcrylicBorder.Material>
+					<ExperimentalAcrylicMaterial MaterialOpacity="0.85"
+                                                 TintColor="Black"
+                                                 TintOpacity="1" />
+				</ExperimentalAcrylicBorder.Material>
+				<AutoCompleteBox Margin="20,40,20,0"
+                                 HorizontalAlignment="Stretch"
+                                 Items="{Binding SearchItems}"
+                                 Watermark="Search" />
+			</ExperimentalAcrylicBorder>
+			<ExperimentalAcrylicBorder IsHitTestVisible="False">
+				<ExperimentalAcrylicBorder.Material>
+					<ExperimentalAcrylicMaterial MaterialOpacity="0.85"
+                                                 TintColor="#222222"
+                                                 TintOpacity="1" />
+				</ExperimentalAcrylicBorder.Material>
+				<TextBlock Margin="40,20"
+                           FontSize="32"
+                           FontWeight="Light"
+                           Text="{Binding #TabControl.SelectedItem.Header}" />
+			</ExperimentalAcrylicBorder>
+		</DockPanel>
 
-    <Grid RowDefinitions="Auto,5,*">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" MinWidth="150" />
-            <ColumnDefinition Width="5" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
-        <Border Grid.Row="0"
-                Grid.Column="0"
-                Grid.ColumnSpan="3"
-                Height="55"
-                Background="#547E9C">
-            <TextBlock FontSize="18" Text="{Binding Navigation.SelectedView.Header}" />
-        </Border>
-
-        <ListBox Grid.Row="2"
-                 Grid.Column="0"
-                 Items="{Binding Navigation.Views}"
-                 SelectedItem="{Binding Navigation.SelectedView}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Header}" />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-
-        <ContentControl Grid.Row="2"
-                        Grid.Column="2"
-                        Content="{Binding Navigation.SelectedView.Control}" />
-    </Grid>
-</Window>
+		<TabControl x:Name="TabControl"
+                    Margin="0,40,0,20"
+                    Classes="sidebar"
+                    Items="{Binding Items}">
+			<TabControl.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding}" />
+				</DataTemplate>
+			</TabControl.ItemTemplate>
+		</TabControl>
+	</Panel>
+</FluentWindow>

@@ -1,12 +1,17 @@
-﻿namespace AvaloniaProofOfConcept.ViewModels
+﻿using System.Collections.ObjectModel;
+
+namespace AvaloniaProofOfConcept
 {
     public sealed class MainWindowViewModel : ViewModelBase
     {
-        public NavigationViewModel Navigation { get; }
+        public ObservableCollection<ViewModelBase> Items { get; }
 
         public MainWindowViewModel()
         {
-            Navigation = new NavigationViewModel();
+            Items = new ObservableCollection<ViewModelBase>
+            {
+                new ProcessViewModel()
+            };
         }
     }
 }
