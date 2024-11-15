@@ -1,58 +1,30 @@
-﻿<FluentWindow x:Class="AvaloniaProofOfConcept.Views.MainWindow"
-              xmlns="https://github.com/avaloniaui"
-              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-              xmlns:local="clr-namespace:AvaloniaProofOfConcept"
-              Title="AvaloniaProofOfConcept"
-              Width="1920"
-              Height="1080"
-              Foreground="{StaticResource SystemBaseHighColor}"
-              Icon="/Assets/avalonia-logo.ico">
+﻿<Window x:Class="AvaloniaProofOfConcept.Views.MainWindow"
+        xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viewModels="clr-namespace:AvaloniaProofOfConcept.ViewModels"
+        Title="AvaloniaProofOfConcept"
+        Width="1920"
+        Height="1080"
+        Foreground="{StaticResource SystemBaseHighColor}"
+        Icon="/Assets/avalonia-logo.ico">
 
-	<Design.DataContext>
-		<local:MainWindowViewModel />
-	</Design.DataContext>
+    <Design.DataContext>
+        <viewModels:MainWindowViewModel />
+    </Design.DataContext>
 
-	<FluentWindow.Styles>
-		<Style Selector="TitleBar:fullscreen">
-			<Setter Property="Background" Value="#7f000000" />
-		</Style>
-	</FluentWindow.Styles>
+    <Window.Styles>
+        <Style Selector="TitleBar:fullscreen">
+            <Setter Property="Background" Value="#7f000000" />
+        </Style>
+    </Window.Styles>
 
-	<Panel>
-		<DockPanel HorizontalAlignment="Stretch">
-			<ExperimentalAcrylicBorder Width="240" DockPanel.Dock="Left">
-				<ExperimentalAcrylicBorder.Material>
-					<ExperimentalAcrylicMaterial MaterialOpacity="0.85"
-                                                 TintColor="Black"
-                                                 TintOpacity="1" />
-				</ExperimentalAcrylicBorder.Material>
-				<AutoCompleteBox Margin="20,40,20,0"
-                                 HorizontalAlignment="Stretch"
-                                 Items="{Binding SearchItems}"
-                                 Watermark="Search" />
-			</ExperimentalAcrylicBorder>
-			<ExperimentalAcrylicBorder IsHitTestVisible="False">
-				<ExperimentalAcrylicBorder.Material>
-					<ExperimentalAcrylicMaterial MaterialOpacity="0.85"
-                                                 TintColor="#222222"
-                                                 TintOpacity="1" />
-				</ExperimentalAcrylicBorder.Material>
-				<TextBlock Margin="40,20"
-                           FontSize="32"
-                           FontWeight="Light"
-                           Text="{Binding #TabControl.SelectedItem.Header}" />
-			</ExperimentalAcrylicBorder>
-		</DockPanel>
-
-		<TabControl x:Name="TabControl"
-                    Margin="0,40,0,20"
-                    Classes="sidebar"
-                    Items="{Binding Items}">
-			<TabControl.ItemTemplate>
-				<DataTemplate>
-					<TextBlock Text="{Binding}" />
-				</DataTemplate>
-			</TabControl.ItemTemplate>
-		</TabControl>
-	</Panel>
-</FluentWindow>
+    <ExperimentalAcrylicBorder>
+        <ExperimentalAcrylicBorder.Material>
+            <ExperimentalAcrylicMaterial MaterialOpacity="0.85"
+                                         TintColor="#222222"
+                                         TintOpacity="1" />
+        </ExperimentalAcrylicBorder.Material>
+        
+        <ContentControl Content="{Binding Process}" />
+    </ExperimentalAcrylicBorder>
+</Window>

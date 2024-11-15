@@ -1,30 +1,36 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<OutputType>WinExe</OutputType>
-		<TargetFrameworks>net50</TargetFrameworks>
-		<PublishSingleFile>false</PublishSingleFile>
-		<Platforms>AnyCPU;x64;x86</Platforms>
-		<RuntimeIdentifiers>win-x64;osx-x64;linux-x64</RuntimeIdentifiers>
-	</PropertyGroup>
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <PublishSingleFile>false</PublishSingleFile>
+        <Platforms>AnyCPU;x64;x86</Platforms>
+        <RuntimeIdentifiers>win-x64;osx-x64;linux-x64</RuntimeIdentifiers>
+        <TargetFramework>net9.0</TargetFramework>
+        <LangVersion>13</LangVersion>
+    </PropertyGroup>
 
-	<PropertyGroup>
-		<UseAppHost>true</UseAppHost>
-	</PropertyGroup>
+    <PropertyGroup>
+        <UseAppHost>true</UseAppHost>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<Compile Update="**\*.xaml.cs">
-			<DependentUpon>%(Filename)</DependentUpon>
-		</Compile>
-		<AvaloniaResource Include="**\*.xaml">
-			<SubType>Designer</SubType>
-		</AvaloniaResource>
-		<AvaloniaResource Include="Assets\*" />
-	</ItemGroup>
+    <ItemGroup>
+        <Compile Update="**\*.xaml.cs">
+            <DependentUpon>%(Filename)</DependentUpon>
+        </Compile>
+        <AvaloniaResource Include="**\*.xaml">
+            <SubType>Designer</SubType>
+        </AvaloniaResource>
+        <AvaloniaResource Include="Assets\*"/>
+    </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Avalonia" Version="0.10.999-cibuild0012650-beta" />
-		<PackageReference Include="Avalonia.Desktop" Version="0.10.999-cibuild0012650-beta" />
-		<PackageReference Include="Avalonia.ReactiveUI" Version="0.10.999-cibuild0012650-beta" />
-		<PackageReference Include="Avalonia.Diagnostics" Version="0.10.999-cibuild0012558-beta" />
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="11.2.1"/>
+        <PackageReference Include="Avalonia.Desktop" Version="11.2.1"/>
+        <PackageReference Include="Avalonia.ReactiveUI" Version="11.2.1"/>
+        <PackageReference Include="Avalonia.Diagnostics" Version="11.2.1"/>
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.1"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="System.Xaml" />
+    </ItemGroup>
 </Project>

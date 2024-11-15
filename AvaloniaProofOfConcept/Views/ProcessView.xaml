@@ -1,53 +1,55 @@
-﻿<UserControl x:Class="AvaloniaProofOfConcept.ProcessView"
+﻿<UserControl x:Class="AvaloniaProofOfConcept.Views.ProcessView"
              xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dd="clr-namespace:AvaloniaProofOfConcept;assembly=AvaloniaProofOfConcept"
+             d:DataContext="{x:Static dd:DesignData.ProcessViewModel}"
+             xmlns:diagnostics="clr-namespace:System.Diagnostics;assembly=System.Diagnostics.Process">
 
-	<UserControl.Resources>
-		<DataTemplate x:Key="ProcessTemplate">
-			<Grid ColumnDefinitions="Auto,5,Auto,5,*,*" RowDefinitions="5,Auto,5">
+    <UserControl.Resources>
+        <DataTemplate x:Key="ProcessTemplate" DataType="diagnostics:Process">
+            <Grid ColumnDefinitions="Auto,4,*,4,*,*">
+                <Image
+                    Grid.Column="0"
+                    Width="16"
+                    Height="16"
+                    Source="/Assets/ic_power_settings_new_black_24dp_2x.png" />
 
-				<Image Grid.Row="1"
-                       Grid.Column="0"
-                       Width="16"
-                       Height="16"
-                       Source="/Assets/ic_power_settings_new_black_24dp_2x.png" />
+                <TextBlock
+                    Grid.Column="2"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="Bold"
+                    Text="{Binding ProcessName}" />
 
-				<TextBlock Grid.Row="1"
-                           Grid.Column="2"
-                           VerticalAlignment="Center"
-                           FontSize="14"
-                           FontWeight="Bold"
-                           Text="{Binding ProcessName}" />
+                <TextBlock
+                    Grid.Column="4"
+                    VerticalAlignment="Center"
+                    Text="{Binding Id}" />
 
-				<TextBlock Grid.Row="1"
-                           Grid.Column="4"
-                           VerticalAlignment="Center"
-                           Text="{Binding Id}" />
+                <TextBlock
+                    Grid.Column="5"
+                    VerticalAlignment="Center"
+                    Text="{Binding MachineName}" />
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
 
-				<TextBlock Grid.Row="1"
-                           Grid.Column="5"
-                           VerticalAlignment="Center"
-                           Text="{Binding MachineName}" />
-			</Grid>
-		</DataTemplate>
-	</UserControl.Resources>
-
-	<Grid ColumnDefinitions="5,*,Auto,*,5" RowDefinitions="5,Auto,5,*,5">
-
-		<DockPanel Grid.Row="1"
+    <Grid ColumnDefinitions="4,*,Auto,*,4" RowDefinitions="4,Auto,4,*,4">
+        <DockPanel Grid.Row="1"
                    Grid.Column="1"
                    Grid.ColumnSpan="3">
-			<TextBlock HorizontalAlignment="Stretch"
+            <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Center"
                        DockPanel.Dock="Left"
                        Text="Search:" />
 
-			<TextBox Margin="5,0,0,0" Text="{Binding SearchTerm}" />
-		</DockPanel>
+            <TextBox Margin="5,0,0,0" Text="{Binding SearchTerm}" />
+        </DockPanel>
 
-		<ListBox Grid.Row="3"
+        <ListBox Grid.Row="3"
                  Grid.Column="1"
                  Grid.ColumnSpan="3"
                  ItemTemplate="{DynamicResource ProcessTemplate}"
-                 Items="{Binding SearchResults}" />
-	</Grid>
+                 ItemsSource="{Binding SearchResults}" />
+    </Grid>
 </UserControl>

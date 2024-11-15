@@ -1,32 +1,30 @@
+using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using AvaloniaProofOfConcept.ViewModels;
-using System;
 
-namespace AvaloniaProofOfConcept
+namespace AvaloniaProofOfConcept;
+
+public class ViewLocator : IDataTemplate
 {
-    public class ViewLocator : IDataTemplate
+    public Control Build(object param)
     {
-        public bool SupportsRecycling => false;
-
-        public IControl Build(object data)
+        var typeName = param?.GetType().FullName?.Replace("ViewModel", "View").Replace("ViewModels","Views");
+        if (string.IsNullOrEmpty(typeName))
         {
-            var name = data.GetType().FullName.Replace("ViewModel", "View");
-            var type = Type.GetType(name);
-
-            if (type != null)
-            {
-                return (Control)Activator.CreateInstance(type);
-            }
-            else
-            {
-                return new TextBlock { Text = "Not Found: " + name };
-            }
+            return new TextBlock { Text = "Not Found: " + typeName };
         }
 
-        public bool Match(object data)
+        var type = Type.GetType(typeName);
+        if (type == null)
         {
-            return data is ViewModelBase;
+            return new TextBlock { Text = "Not Found: " + typeName };
         }
+
+        return (Control)Activator.CreateInstance(type);
+    }
+
+    public bool Match(object data)
+    {
+        return true;
     }
 }

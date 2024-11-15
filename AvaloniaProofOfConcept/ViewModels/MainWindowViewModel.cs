@@ -1,17 +1,15 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace AvaloniaProofOfConcept
-{
-    public sealed class MainWindowViewModel : ViewModelBase
-    {
-        public ObservableCollection<ViewModelBase> Items { get; }
+namespace AvaloniaProofOfConcept.ViewModels;
 
-        public MainWindowViewModel()
-        {
-            Items = new ObservableCollection<ViewModelBase>
-            {
-                new ProcessViewModel()
-            };
-        }
+public sealed class MainWindowViewModel : ViewModelBase
+{
+    public MainWindowViewModel()
+    {
+        Process = new ProcessViewModel();
+        Items = [Process];
     }
+
+    public ProcessViewModel Process { get; }
+    public ObservableCollection<ViewModelBase> Items { get; }
 }

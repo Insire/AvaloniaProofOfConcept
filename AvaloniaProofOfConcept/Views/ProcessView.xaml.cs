@@ -1,18 +1,17 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace AvaloniaProofOfConcept
-{
-    public class ProcessView : UserControl
-    {
-        public ProcessView()
-        {
-            this.InitializeComponent();
-        }
+namespace AvaloniaProofOfConcept.Views;
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+public class ProcessView : UserControl
+{
+    public ProcessView()
+    {
+        InitializeComponent();
+    }
+
+    private void InitializeComponent()
+    {
+        AvaloniaXamlLoader.Load(this);
     }
 }

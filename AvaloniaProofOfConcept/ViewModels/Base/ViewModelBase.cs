@@ -1,8 +1,5 @@
 ﻿using ReactiveUI;
 
-namespace AvaloniaProofOfConcept
-{
-    public class ViewModelBase : ReactiveObject
-    {
-    }
-}
+namespace AvaloniaProofOfConcept;
+
+public class ViewModelBase : ReactiveObject;
