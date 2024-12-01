@@ -1,59 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reactive.Concurrency;
-using System.Reactive.Linq;
-using System.Threading.Tasks;
-using ReactiveUI;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace AvaloniaProofOfConcept.ViewModels;
 
-public sealed class ProcessViewModel : ViewModelBase
+public sealed partial class ProcessViewModel : ObservableObject
 {
-    private readonly ObservableAsPropertyHelper<IEnumerable<Process>> _searchResults;
-    private readonly string _searchTerm;
+    [ObservableProperty]
+    private string? _processName;
 
-    public ProcessViewModel()
-    {
-        SearchTerm = "svchost";
-        ExecuteSearch =
-            ReactiveCommand.CreateFromTask<string, IEnumerable<Process>>(searchTerm => GetProcesses(searchTerm));
+    [ObservableProperty]
+    private int _id;
 
-        this.WhenAnyValue(x => x.SearchTerm)
-            .Throttle(TimeSpan.FromMilliseconds(500), RxApp.MainThreadScheduler)
-            .Select(x => x?.Trim())
-            .DistinctUntilChanged()
-            .InvokeCommand(ExecuteSearch);
+    [ObservableProperty]
+    private int _threads;
 
-        _searchResults = ExecuteSearch.ToProperty(this, x => x.SearchResults, new List<Process>());
-    }
+    [ObservableProperty]
+    private int _sessionId;
 
-    private string SearchTerm
-    {
-        get => _searchTerm;
-        init => this.RaiseAndSetIfChanged(ref _searchTerm, value);
-    }
+    [ObservableProperty]
+    private string? _machineName;
 
-    private ReactiveCommand<string, IEnumerable<Process>> ExecuteSearch { get; }
+    [ObservableProperty]
+    private long _pagedMemorySize64;
 
-    public IEnumerable<Process> SearchResults => _searchResults.Value;
+    [ObservableProperty]
+    private long _pagedSystemMemorySize64;
 
-    private static async Task<IEnumerable<Process>> GetProcesses(string processName)
-    {
-        var processes = await Task.Run(() => Process.GetProcesses(Environment.MachineName));
+    [ObservableProperty]
+    private long _peakPageMemorySize64;
 
-        if (string.IsNullOrEmpty(processName))
-            return processes;
+    [ObservableProperty]
+    private long _peakVirtualMemorySize64;
 
-        var result = processes
-            .Where(p =>
-                p.ProcessName.Equals(processName, StringComparison.InvariantCultureIgnoreCase) 
-                || p.ProcessName.Contains(processName))
-            .OrderBy(p=>p.ProcessName)
-            .ThenBy(p=> p.Id)
-            .ToList();
+    [ObservableProperty]
+    private long _virtualMemorySizeX64;
 
-        return result;
-    }
+    [ObservableProperty]
+    private long _peakWorkingSetX64;
+
+    [ObservableProperty]
+    private long _privateMemorySizeX64;
 }

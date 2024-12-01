@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="AvaloniaProofOfConcept.Views.ProcessesView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dd="clr-namespace:AvaloniaProofOfConcept;assembly=AvaloniaProofOfConcept"
+             xmlns:viewModels="clr-namespace:AvaloniaProofOfConcept.ViewModels"
+             d:DataContext="{x:Static dd:DesignData.ProcessViewModel}"
+             x:DataType="viewModels:ProcessesViewModel">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="ProcessTemplate" DataType="viewModels:ProcessViewModel">
+            <Grid ColumnDefinitions="Auto,4,*,4,*,4,*,4,*,4,*,4,*,4,*,4,*,4,*,4,*,4,*,4,*">
+                <Image Grid.Column="0"
+                       Width="16"
+                       Height="16"
+                       Source="/Assets/ic_power_settings_new_black_24dp_2x.png" />
+
+                <TextBlock Grid.Column="2"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           FontWeight="Bold"
+                           Text="{Binding ProcessName}"
+                           ToolTip.Tip="ProcessName" />
+
+                <TextBlock Grid.Column="4"
+                           VerticalAlignment="Center"
+                           Text="{Binding Id}"
+                           ToolTip.Tip="ProcessId" />
+
+                <TextBlock Grid.Column="6"
+                           VerticalAlignment="Center"
+                           Text="{Binding MachineName}"
+                           ToolTip.Tip="MachineName" />
+
+                <TextBlock Grid.Column="8"
+                           VerticalAlignment="Center"
+                           Text="{Binding SessionId}"
+                           ToolTip.Tip="SessionId" />
+
+                <TextBlock Grid.Column="10"
+                           VerticalAlignment="Center"
+                           Text="{Binding Threads}"
+                           ToolTip.Tip="Thread count" />
+
+                <TextBlock Grid.Column="12"
+                           VerticalAlignment="Center"
+                           Text="{Binding VirtualMemorySizeX64}"
+                           ToolTip.Tip="VirtualMemorySize64" />
+
+                <TextBlock Grid.Column="14"
+                           VerticalAlignment="Center"
+                           Text="{Binding PeakVirtualMemorySize64}"
+                           ToolTip.Tip="PeakVirtualMemorySize64" />
+
+                <TextBlock Grid.Column="16"
+                           VerticalAlignment="Center"
+                           Text="{Binding PagedMemorySize64}"
+                           ToolTip.Tip="PagedMemorySize64" />
+
+                <TextBlock Grid.Column="18"
+                           VerticalAlignment="Center"
+                           Text="{Binding PagedSystemMemorySize64}"
+                           ToolTip.Tip="PagedSystemMemorySize64" />
+
+                <TextBlock Grid.Column="20"
+                           VerticalAlignment="Center"
+                           Text="{Binding PeakPageMemorySize64}"
+                           ToolTip.Tip="PeakPagedMemorySize64" />
+
+                <TextBlock Grid.Column="22"
+                           VerticalAlignment="Center"
+                           Text="{Binding PeakWorkingSetX64}"
+                           ToolTip.Tip="PeakWorkingSet64" />
+
+                <TextBlock Grid.Column="24"
+                           VerticalAlignment="Center"
+                           Text="{Binding PrivateMemorySizeX64}"
+                           ToolTip.Tip="PrivateMemorySize64" />
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid ColumnDefinitions="4,*,Auto,*,4" RowDefinitions="4,Auto,4,*,4">
+        <DockPanel Grid.Row="1"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="3">
+            <TextBlock HorizontalAlignment="Stretch"
+                       VerticalAlignment="Center"
+                       DockPanel.Dock="Left"
+                       Text="Search:" />
+
+            <TextBox Margin="5,0,0,0" Text="{Binding SearchTerm}" />
+        </DockPanel>
+
+        <ListBox Grid.Row="3"
+                 Grid.Column="1"
+                 Grid.ColumnSpan="3"
+                 ItemTemplate="{DynamicResource ProcessTemplate}"
+                 ItemsSource="{Binding SearchResults}" />
+    </Grid>
+</UserControl>

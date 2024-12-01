@@ -1,15 +1,28 @@
-﻿using System.Collections.ObjectModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace AvaloniaProofOfConcept.ViewModels;
 
-public sealed class MainWindowViewModel : ViewModelBase
+public sealed partial class MainWindowViewModel : ObservableObject
 {
-    public MainWindowViewModel()
+    private readonly ObservableCollection<ObservableObject> _items;
+
+    public MainWindowViewModel(ProcessesViewModel processesViewModel)
     {
-        Process = new ProcessViewModel();
-        Items = [Process];
+        _items = new ObservableCollection<ObservableObject>();
+        Items = new ReadOnlyObservableCollection<ObservableObject>(_items);
+
+        Process = processesViewModel;
+        _items.Add(Process);
     }
 
-    public ProcessViewModel Process { get; }
-    public ObservableCollection<ViewModelBase> Items { get; }
+    public ProcessesViewModel Process { get; }
+
+    public ReadOnlyObservableCollection<ObservableObject> Items { get; }
+
+    public async Task Initialize()
+    {
+        await Process.SearchCommand.ExecuteAsync("");
+    }
 }

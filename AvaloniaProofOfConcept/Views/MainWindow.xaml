@@ -5,6 +5,7 @@
         Title="AvaloniaProofOfConcept"
         Width="1920"
         Height="1080"
+        x:DataType="viewModels:MainWindowViewModel"
         Foreground="{StaticResource SystemBaseHighColor}"
         Icon="/Assets/avalonia-logo.ico">
 
@@ -24,7 +25,7 @@
                                          TintColor="#222222"
                                          TintOpacity="1" />
         </ExperimentalAcrylicBorder.Material>
-        
+
         <ContentControl Content="{Binding Process}" />
     </ExperimentalAcrylicBorder>
 </Window>

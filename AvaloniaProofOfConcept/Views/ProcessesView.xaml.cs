@@ -3,9 +3,9 @@ using Avalonia.Markup.Xaml;
 
 namespace AvaloniaProofOfConcept.Views;
 
-public class ProcessView : UserControl
+public class ProcessesView : UserControl
 {
-    public ProcessView()
+    public ProcessesView()
     {
         InitializeComponent();
     }
