@@ -1,4 +1,6 @@
-﻿using Avalonia;
+﻿using System;
+using System.Diagnostics;
+using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Styling;
@@ -21,7 +23,7 @@ public sealed class App : Application
             .AddSingleton<MainWindowViewModel>()
             .AddSingleton<IMessenger, StrongReferenceMessenger>()
             .AddSingleton<ProcessesViewModel>()
-            .AddSingleton<IScheduler, TaskPoolScheduler>(provider => TaskPoolScheduler.Default)
+            .AddSingleton<IScheduler, TaskPoolScheduler>(_ => TaskPoolScheduler.Default)
             .BuildServiceProvider();
     }
 
@@ -32,25 +34,36 @@ public sealed class App : Application
 
     public override async void OnFrameworkInitializationCompleted()
     {
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        try
         {
-            var viewModel = _services.GetRequiredService<MainWindowViewModel>();
-            desktop.MainWindow = new MainWindow
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                DataContext = viewModel
-            };
+                var viewModel = _services.GetRequiredService<MainWindowViewModel>();
+                desktop.MainWindow = new MainWindow
+                {
+                    DataContext = viewModel
+                };
 
-            await viewModel.Initialize();
+                await viewModel.Initialize();
 
-            desktop.ShutdownRequested += (_, _) =>
-            {
-                _services.Dispose();
-            };
+                desktop.ShutdownRequested += (_, _) =>
+                {
+                    _services.Dispose();
+                };
+            }
+
+            var theme = new SimpleTheme();
+            theme.TryGetResource("Button", ThemeVariant.Dark, out _);
+
+            base.OnFrameworkInitializationCompleted();
         }
-
-        var theme = new SimpleTheme();
-        theme.TryGetResource("Button", ThemeVariant.Dark, out _);
-
-        base.OnFrameworkInitializationCompleted();
+        catch (Exception ex)
+        {
+#if DEBUG
+            Debug.WriteLine(ex.ToString());
+#else
+            throw;
+#endif
+        }
     }
 }

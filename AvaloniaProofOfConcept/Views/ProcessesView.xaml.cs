@@ -3,7 +3,8 @@ using Avalonia.Markup.Xaml;
 
 namespace AvaloniaProofOfConcept.Views;
 
-public class ProcessesView : UserControl
+// ReSharper disable once UnusedType.Global
+public sealed class ProcessesView : UserControl
 {
     public ProcessesView()
     {

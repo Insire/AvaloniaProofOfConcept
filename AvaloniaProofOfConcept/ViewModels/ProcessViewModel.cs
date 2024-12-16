@@ -5,7 +5,7 @@ namespace AvaloniaProofOfConcept.ViewModels;
 public sealed partial class ProcessViewModel : ObservableObject
 {
     [ObservableProperty]
-    private string? _processName;
+    private string _processName = string.Empty;
 
     [ObservableProperty]
     private int _id;

@@ -22,7 +22,7 @@ public sealed partial class ProcessesViewModel : ObservableRecipient, IDisposabl
     private readonly SourceCache<ProcessViewModel, int> _cache;
 
     [ObservableProperty]
-    private string _searchTerm;
+    private string? _searchTerm;
 
     public ReadOnlyObservableCollection<ProcessViewModel> SearchResults { get; }
 
@@ -55,7 +55,7 @@ public sealed partial class ProcessesViewModel : ObservableRecipient, IDisposabl
     }
 
     [RelayCommand(AllowConcurrentExecutions = false)]
-    public async Task Search(object? argument)
+    private async Task Search(object? argument)
     {
         if (argument is string searchTerm)
         {
@@ -97,7 +97,10 @@ public sealed partial class ProcessesViewModel : ObservableRecipient, IDisposabl
 
     private static async Task<IReadOnlyList<ProcessViewModel>> GetProcesses(string? processName)
     {
-        var processes = await Task.Run(() => Process.GetProcesses(Environment.MachineName).Where(p => p.Id > 0));
+        var processes = await Task.Run(() => 
+            Process.GetProcesses(Environment.MachineName)
+            .Where(p => p.Id > 0 && string.IsNullOrEmpty(p.ProcessName) == false)
+            .ToArray());
 
         if (string.IsNullOrEmpty(processName))
         {
@@ -118,7 +121,7 @@ public sealed partial class ProcessesViewModel : ObservableRecipient, IDisposabl
     {
         using (process)
         {
-            return new ProcessViewModel()
+            return new ProcessViewModel
             {
                 Id = process.Id,
                 ProcessName = process.ProcessName,

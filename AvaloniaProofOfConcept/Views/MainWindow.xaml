@@ -9,10 +9,6 @@
         Foreground="{StaticResource SystemBaseHighColor}"
         Icon="/Assets/avalonia-logo.ico">
 
-    <Design.DataContext>
-        <viewModels:MainWindowViewModel />
-    </Design.DataContext>
-
     <Window.Styles>
         <Style Selector="TitleBar:fullscreen">
             <Setter Property="Background" Value="#7f000000" />
@@ -26,6 +22,10 @@
                                          TintOpacity="1" />
         </ExperimentalAcrylicBorder.Material>
 
-        <ContentControl Content="{Binding Process}" />
+        <TabControl>
+            <TabItem Header="Processes">
+                <ContentControl Content="{Binding Process}" />
+            </TabItem>
+        </TabControl>
     </ExperimentalAcrylicBorder>
 </Window>

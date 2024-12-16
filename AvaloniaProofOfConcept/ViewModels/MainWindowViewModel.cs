@@ -4,25 +4,25 @@ using System.Threading.Tasks;
 
 namespace AvaloniaProofOfConcept.ViewModels;
 
-public sealed partial class MainWindowViewModel : ObservableObject
+public sealed class MainWindowViewModel : ObservableObject
 {
-    private readonly ObservableCollection<ObservableObject> _items;
-
     public MainWindowViewModel(ProcessesViewModel processesViewModel)
     {
-        _items = new ObservableCollection<ObservableObject>();
-        Items = new ReadOnlyObservableCollection<ObservableObject>(_items);
-
         Process = processesViewModel;
-        _items.Add(Process);
+        
+        var items = new ObservableCollection<ObservableObject>
+        {
+            Process
+        };
+        Items = new ReadOnlyObservableCollection<ObservableObject>(items);
     }
 
     public ProcessesViewModel Process { get; }
 
     public ReadOnlyObservableCollection<ObservableObject> Items { get; }
 
-    public async Task Initialize()
+    public Task Initialize()
     {
-        await Process.SearchCommand.ExecuteAsync("");
+        return Process.SearchCommand.ExecuteAsync("");
     }
 }
