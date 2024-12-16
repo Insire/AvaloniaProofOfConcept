@@ -21,15 +21,15 @@
         <AvaloniaResource Include="**\*.xaml">
             <SubType>Designer</SubType>
         </AvaloniaResource>
-        <AvaloniaResource Include="Assets\*"/>
+        <AvaloniaResource Include="Assets\*" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.2.1"/>
-        <PackageReference Include="Avalonia.Desktop" Version="11.2.1"/>
-        <PackageReference Include="Avalonia.Diagnostics" Version="11.2.1"/>
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.1"/>
-        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+        <PackageReference Include="Avalonia" Version="11.2.2" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.2.2" />
+        <PackageReference Include="Avalonia.Diagnostics" Version="11.2.2" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.2" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
         <PackageReference Include="DynamicData" Version="9.0.4" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
     </ItemGroup>
