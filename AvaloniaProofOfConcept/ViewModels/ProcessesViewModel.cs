@@ -98,7 +98,7 @@ public sealed partial class ProcessesViewModel : ObservableRecipient, IDisposabl
     private static async Task<IReadOnlyList<ProcessViewModel>> GetProcesses(string? processName)
     {
         var processes = await Task.Run(() => 
-            Process.GetProcesses(Environment.MachineName)
+            Process.GetProcesses()
             .Where(p => p.Id > 0 && string.IsNullOrEmpty(p.ProcessName) == false)
             .ToArray());
 
